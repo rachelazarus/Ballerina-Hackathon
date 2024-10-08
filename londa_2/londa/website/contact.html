@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Londa Rides</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .suggestion-box {
+            margin-top: 20px; /* Space above the suggestion box */
+            padding: 10px; /* Padding around the box */
+            border: 1px solid #ccc; /* Border around the suggestion box */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+        }
+        .suggestion-box textarea {
+            width: 100%; /* Full width for textarea */
+            height: 100px; /* Set height for textarea */
+            margin-bottom: 10px; /* Space below the textarea */
+            padding: 5px; /* Padding inside the textarea */
+            border-radius: 5px; /* Round corners */
+            border: 1px solid #ccc; /* Border for textarea */
+        }
+        .suggestion-button {
+            padding: 5px 10px; /* Padding for button */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Round corners */
+            background-color:  #218838; /* Button color */
+            color: white; /* Text color */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Londa Rides</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="schedule_ride.html">Schedule a Ride</a></li>
+                <li><a href="view_rides.html">View Scheduled Rides</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+            <h2>About Londa Rides</h2>
+            <p>Londa Rides is a ride-sharing platform designed to connect drivers with passengers traveling in the same direction. Our mission is to provide affordable and convenient transportation options for students and working-class individuals in Namibia. By enabling users to share rides, we aim to reduce transportation costs, alleviate traffic congestion, and minimize environmental impact.</p>
+
+            <h2>Contact Details</h2>
+            <p>If you have any questions or feedback, feel free to reach out to us:</p>
+            <p><strong>Email:</strong> <a href="mailto:londarides.com.gmail">londarides.com.gmail</a></p>
+            <p><strong>Phone:</strong> +264 81 350 2500</p>
+            <p><strong>Address:</strong> NUST, Windhoek, Namibia</p>
+
+            <h2>Suggestions</h2>
+            <div class="suggestion-box">
+                <textarea placeholder="Your suggestions here..."></textarea>
+                <button class="suggestion-button" onclick="submitSuggestion()">Submit Suggestion</button>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2024 Londa Rides. All Rights Reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        async function submitSuggestion() {
+            const suggestion = document.querySelector('.suggestion-box textarea').value;
+            if (suggestion) {
+                // Prepare the data to be sent
+                const data = { suggestion: suggestion };
+
+                try {
+                    const response = await fetch('http://localhost:9090/suggestions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        alert(`Thank you for your suggestion: "${suggestion}"`);
+                        document.querySelector('.suggestion-box textarea').value = ''; // Clear the textarea
+                    } else {
+                        alert('Error submitting suggestion. Please try again later.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error submitting suggestion. Please check your network connection.');
+                }
+            } else {
+                alert('Please enter a suggestion before submitting.');
+            }
+        }
+    </script>
+</body>
+</html>

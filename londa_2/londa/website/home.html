@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Londa Rides</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styles for the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .ride img {
+            width: 100px; /* Set a specific width for the images */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px; /* Optional: round corners */
+            margin-right: 10px; /* Space between image and text */
+        }
+        .ride {
+            display: flex; /* Flexbox layout for ride info */
+            align-items: center; /* Center items vertically */
+            margin-bottom: 20px; /* Space between rides */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo.jpg" alt="Londa Rides Logo" class="logo"> <!-- Add your logo image here -->
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="schedule_ride.html">Schedule a Ride</a></li>
+                <li><a href="view_rides.html">View Scheduled Rides</a></li>
+                <li><a href="contact.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Available Rides For Today</h2>
+
+        <!-- Search Bar -->
+        <div id="searchBar">
+            <select id="searchType">
+                <option value="departure">Search by Departure</option>
+                <option value="destination">Search by Destination</option>
+            </select>
+            <input type="text" id="locationSearch" placeholder="Enter location..." onkeyup="filterRides()">
+        </div>
+
+        <div id="availableRides">
+            <!-- Example Ride Items -->
+            <div class="ride" onclick="showDriverInfo('Ndine', 'Toyota Corolla', 'N 098-123 W', 'Katutura', 'CBD', '2024-10-05', '14:00', 'Ndine is a computer science student at NUST. She has 5 years of driving experience and is known for her punctuality.');">
+                <img src="https://th.bing.com/th/id/OIP.eBeSk7VHfbo_nXrE0IRaywHaI4?w=176&h=212&c=7&r=0&o=5&pid=1.7" alt="Ndine Hamukoto's car">
+                <div>
+                    <h3 style="cursor: pointer;">Driver: Ndine Hamukoto</h3>
+                    <p><strong>Car:</strong> Toyota Corolla</p>
+                    <p><strong>Number Plate:</strong> N 098-123 W</p>
+                    <p><strong>Departure:</strong> Katutura</p>
+                    <p><strong>Destination:</strong> CBD</p>
+                    <p><strong>Date:</strong> 2024-10-05</p>
+                    <p><strong>Time:</strong> 14:00</p>
+                    <button onclick="bookRide('Ndine Hamukoto', 'Toyota Corolla', 'N 098-123 W', 'Katutura', 'CBD', '2024-10-05', '14:00'); event.stopPropagation();">Book Ride</button>
+                </div>
+            </div>
+            <div class="ride" onclick="showDriverInfo('Jane Smith', 'Honda Civic', 'N 989-456 S', 'Wanaheda', 'Olympia', '2024-10-06', '09:00', 'Jane is studying business administration and is passionate about helping others.');">
+                <img src="https://th.bing.com/th/id/OIP.JvW9VmC6l71pX5gj3JJSewHaE8?w=298&h=199&c=7&r=0&o=5&pid=1.7" alt="Jane Smith's car">
+                <div>
+                    <h3 style="cursor: pointer;">Driver: Jane Smith</h3>
+                    <p><strong>Car:</strong> Honda Civic</p>
+                    <p><strong>Number Plate:</strong>N 989-456 S</p>
+                    <p><strong>Departure:</strong> Wanaheda</p>
+                    <p><strong>Destination:</strong> Olympia</p>
+                    <p><strong>Date:</strong> 2024-10-06</p>
+                    <p><strong>Time:</strong> 09:00</p>
+                    <button onclick="bookRide('Jane Smith', 'Honda Civic', 'N 989-456 S', 'Wanaheda', 'Olympia', '2024-10-06', '09:00'); event.stopPropagation();">Book Ride</button>
+                </div>
+            </div>
+            <div class="ride" onclick="showDriverInfo('Michael Brown', 'Ford Focus', 'N789-897 W', 'Khomasdal', 'Windhoek West', '2024-10-05', '15:00', 'Michael is a civil engineering student with excellent reviews from passengers.');">
+                <img src="https://th.bing.com/th/id/OIP.gm0u2gYeapdVQ-a9fNPp0AHaF7?w=226&h=181&c=7&r=0&o=5&pid=1.7" alt="Michael Brown's car">
+                <div>
+                    <h3 style="cursor: pointer;">Driver: Michael Brown</h3>
+                    <p><strong>Car:</strong> Ford Focus</p>
+                    <p><strong>Number Plate:</strong> LMN789</p>
+                    <p><strong>Departure:</strong> Khomasdal</p>
+                    <p><strong>Destination:</strong> Windhoek West</p>
+                    <p><strong>Date:</strong> 2024-10-05</p>
+                    <p><strong>Time:</strong> 15:00</p>
+                    <button onclick="bookRide('Michael Brown', 'Ford Focus', 'LMN789', 'Khomasdal', 'Windhoek West', '2024-10-05', '15:00'); event.stopPropagation();">Book Ride</button>
+                </div>
+            </div>
+            <div class="ride" onclick="showDriverInfo('Sam Wilson', 'Nissan Micra', 'N 12 OJ', 'Goreangab', 'Eros', '2024-10-06', '11:00', 'Sam is a psychology student known for his safe driving and great communication skills.');">
+                <img src="https://th.bing.com/th/id/OIP.1c3BoNANCebWrZk56212jwHaE8?w=254&h=180&c=7&r=0&o=5&pid=1.7" alt="Sam Wilson's car">
+                <div>
+                    <h3 style="cursor: pointer;">Driver: Sam Wilson</h3>
+                    <p><strong>Car:</strong> Nissan Micra</p>
+                    <p><strong>Number Plate:</strong>N 12 OJ</p>
+                    <p><strong>Departure:</strong> Goreangab</p>
+                    <p><strong>Destination:</strong> Eros</p>
+                    <p><strong>Date:</strong> 2024-10-06</p>
+                    <p><strong>Time:</strong> 11:00</p>
+                    <button onclick="bookRide('Sam Wilson', 'Nissan Micra', 'N 12 OJ', 'Goreangab', 'Eros', '2024-10-06', '11:00'); event.stopPropagation();">Book Ride</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Modal -->
+        <div id="driverModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modalDriverName"></h3>
+                <p><strong>Car:</strong> <span id="modalCar"></span></p>
+                <p><strong>Number Plate:</strong> <span id="modalNumberPlate"></span></p>
+                <p><strong>Departure:</strong> <span id="modalDeparture"></span></p>
+                <p><strong>Destination:</strong> <span id="modalDestination"></span></p>
+                <p><strong>Date:</strong> <span id="modalDate"></span></p>
+                <p><strong>Time:</strong> <span id="modalTime"></span></p>
+                <p><strong>About Driver:</strong></p>
+                <p id="modalDriverInfo"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Londa Rides. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function showDriverInfo(name, car, numberPlate, departure, destination, date, time, info) {
+            document.getElementById('modalDriverName').innerText = name;
+            document.getElementById('modalCar').innerText = car;
+            document.getElementById('modalNumberPlate').innerText = numberPlate;
+            document.getElementById('modalDeparture').innerText = departure;
+            document.getElementById('modalDestination').innerText = destination;
+            document.getElementById('modalDate').innerText = date;
+            document.getElementById('modalTime').innerText = time;
+            document.getElementById('modalDriverInfo').innerText = info;
+
+            // Show the modal
+            document.getElementById('driverModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('driverModal').style.display = "none";
+        }
+
+        function bookRide(driverName, car, numberPlate, departure, destination, date, time) {
+            // Redirect to View Scheduled Rides page
+            window.location.href = "view_rides.html"; // Change to the URL of your scheduled rides page
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('driverModal')) {
+                closeModal();
+            }
+        }
+
+        function filterRides() {
+            const searchType = document.getElementById('searchType').value;
+            const searchQuery = document.getElementById('locationSearch').value.toLowerCase();
+            const rides = document.querySelectorAll('.ride');
+
+            rides.forEach(ride => {
+                const departure = ride.querySelector('p:nth-child(5)').innerText.toLowerCase();
+                const destination = ride.querySelector('p:nth-child(6)').innerText.toLowerCase();
+
+                if (
+                    (searchType === 'departure' && departure.includes(searchQuery)) ||
+                    (searchType === 'destination' && destination.includes(searchQuery))
+                ) {
+                    ride.style.display = 'flex'; // Show ride
+                } else {
+                    ride.style.display = 'none'; // Hide ride
+                }
+            });
+        }
+    </script>
+</body>
+</html>

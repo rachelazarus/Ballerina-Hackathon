@@ -1,0 +1,166 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color:  #218838; /* Green header background */
+    color: white; /* White text color */
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center; /* Center the nav items horizontally */
+    align-items: center;
+    position: relative;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* Remove margin from the last item */
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold; /* Optional: make the text bold */
+    font-size: 18px; /* Optional: adjust the font size */
+    color: white; /* Set the text color */
+}
+
+.logo {
+    max-width: 100px; /* Adjust the width as needed */
+    position: absolute;
+    right: 0; /* Move the logo to the right of the navbar */
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center the logo */
+}
+
+main {
+    padding: 20px; /* Padding for main content */
+    text-align: center; /* Center-align text in main section */
+}
+
+h2 {
+    margin-top: 0; /* Remove default margin from top */
+    color: #218838; /* Green color for headings */
+}
+
+#availableRides {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap to next line */
+    justify-content: center; /* Center items */
+    margin-top: 20px; /* Space above rides section */
+}
+
+.ride {
+    background-color: white; /* White background for rides */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 10px; /* Space around each ride card */
+    padding: 20px; /* Padding inside each ride card */
+    width: 300px; /* Fixed width for ride cards */
+    text-align: left; /* Left-align text in ride cards */
+    transition: transform 0.2s; /* Animation effect on hover */
+}
+
+.ride:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.ride h3 {
+    color: #218838; /* Green color for ride titles */
+    margin: 0; /* Remove default margin */
+}
+
+.ride p {
+    margin: 5px 0; /* Space between paragraphs */
+}
+
+button {
+    background-color:  #218838; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px 15px; /* Padding inside button */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition effect on hover */
+}
+
+button:hover {
+    background-color: #1e7e34; /* Darker green on hover */
+}
+
+footer {
+    text-align: center; /* Center-align footer text */
+    padding: 20px; /* Padding for footer */
+    background-color: #218838; /* Green footer background */
+    color: white; /* White text color */
+    position: relative; /* Relative positioning */
+    bottom: 0; /* Align to bottom */
+    width: 100%; /* Full width */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 600px) {
+    nav ul li {
+        display: block; /* Stack menu items vertically on small screens */
+        margin: 10px 0; /* Space between items */
+    }
+
+    #availableRides {
+        flex-direction: column; /* Stack ride cards vertically */
+    }
+
+    .ride {
+        width: 90%; /* Full width on small screens */
+    }
+}header nav {
+    display: flex;
+    justify-content: center; /* Center the navigation items */
+    align-items: center;
+    background-color: #218838;
+    padding: 20px;
+    position: relative;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logo {
+    position: absolute;
+    left: 20px; /* Adjust this value to position the logo horizontally */
+    width: 50px; /* Adjust the size of your logo */
+    height: auto;
+}
+

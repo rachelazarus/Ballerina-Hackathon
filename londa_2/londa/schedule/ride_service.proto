@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+service RideService {
+  rpc ScheduleRide(RideRequest) returns (VehicleResponse);
+}
+
+message RideRequest {
+  string departure = 1;
+  string destination = 2;
+  string date = 3;
+  string time = 4;
+  int32 passengers = 5;
+}
+
+message Vehicle {
+  string driver = 1;
+  string car = 2;
+  int32 seats = 3;
+}
+
+message VehicleResponse {
+  repeated Vehicle vehicles = 1;
+}

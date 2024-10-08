@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Scheduled Rides - Londa Rides</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .message-container {
+            display: none; /* Hidden by default */
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Londa Rides</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="schedule_ride.html">Schedule a Ride</a></li>
+                <li><a href="view_rides.html">View Scheduled Rides</a></li>
+                <li><a href="contact.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Scheduled Ride</h2>
+        <div id="rideDetails">
+            <h3 id="driverName"></h3>
+            <p><strong>Car:</strong> <span id="driverCar"></span></p>
+            <p><strong>Number Plate:</strong> <span id="driverNumberPlate"></span></p>
+            <p><strong>Departure:</strong> <span id="driverDeparture"></span></p>
+            <p><strong>Destination:</strong> <span id="driverDestination"></span></p>
+            <p><strong>Date:</strong> <span id="driverDate"></span></p>
+            <p><strong>Time:</strong> <span id="driverTime"></span></p>
+            <button onclick="callDriver()">Call Driver</button>
+            <button onclick="toggleMessageContainer()">Message Driver</button>
+            <button onclick="cancelRide()">Cancel Ride</button>
+        </div>
+
+        <div id="messageContainer" class="message-container">
+            <textarea id="messageInput" placeholder="Type your message here..."></textarea><br>
+            <button onclick="sendMessage()">Send Message</button>
+            <button onclick="toggleMessageContainer()">Cancel</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Londa Rides. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Dummy data for demonstration
+        const rideInfo = {
+            name: "Ndine Hamukoto",
+            car: "Toyota Corolla",
+            numberPlate: "N 098-123 W",
+            departure: "Katutura",
+            destination: "CBD",
+            date: "2024-10-05",
+            time: "14:00",
+            phone: "123-456-7890" // Example phone number
+        };
+
+        // Populate ride details
+        document.getElementById('driverName').innerText = rideInfo.name;
+        document.getElementById('driverCar').innerText = rideInfo.car;
+        document.getElementById('driverNumberPlate').innerText = rideInfo.numberPlate;
+        document.getElementById('driverDeparture').innerText = rideInfo.departure;
+        document.getElementById('driverDestination').innerText = rideInfo.destination;
+        document.getElementById('driverDate').innerText = rideInfo.date;
+        document.getElementById('driverTime').innerText = rideInfo.time;
+
+        function callDriver() {
+            window.location.href = `tel:${rideInfo.phone}`; // Initiates a call
+        }
+
+        function toggleMessageContainer() {
+            const container = document.getElementById('messageContainer');
+            container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('messageInput').value;
+            if (message) {
+                alert(`Message sent to ${rideInfo.name}: ${message}`);
+                document.getElementById('messageInput').value = ''; // Clear input after sending
+                toggleMessageContainer(); // Close message container
+            } else {
+                alert('Please type a message before sending.');
+            }
+        }
+
+        function cancelRide() {
+            // Logic to cancel the ride can go here
+            alert('Ride has been canceled.');
+        }
+    </script>
+</body>
+</html>
